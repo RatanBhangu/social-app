@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MY APP</title>
+</head>
+
+<body>
+        <!-- <form action="/api/v1/post/files" enctype="multipart/form-data" method="POST">
+        </form> -->
+
+    <!--   PHOTO   -->
+    
+    <form action="/api/v1/post/upload/photo" enctype="multipart/form-data" method="POST">
+        <input type="file" name="myImage" accept="image/*" />
+        <input class="form-control" type="text" name="content" id="content" placeholder="enter content">
+        <input class="form-control" type="text" name="channel_id" id="channel_id" placeholder="enter channelname" />
+        <input type="submit" value="Upload Photo" />
+    </form>
+
+
+    <!--  MULTIPLE  PHOTO  --->
+    <!-- accept="image/*" -->
+    <form action="/api/v1/post/uploadfiles" enctype="multipart/form-data" method="POST">
+        <input type="file" name="myFiles" multiple/>
+        <input class="form-control" type="text" name="content" id="content" placeholder="enter content">
+        <input class="form-control" type="text" name="channel_id" id="channel_id" placeholder="enter channelname" />
+        <input type="submit" value="Upload Multiple Files" />
+    </form>
+  
+      <!--   VIDEO  --->
+
+      <form action="/api/v1/post/upload/video" enctype="multipart/form-data" method="POST">
+        <input type="file" name="myVideo" accept="video/*" />
+        <input class="form-control" type="text" name="content" id="content" placeholder="enter content">
+        <input class="form-control" type="text" name="channel_id" id="channel_id" placeholder="enter channelname" />
+        <input type="submit" value="Upload Video" />
+    </form>
+
+</body>
+
+</html>

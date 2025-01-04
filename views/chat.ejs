@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat-App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+</head>
+<script src="/socket.io/socket.io.js"></script>
+
+<body>
+  <form action="/api/v1/chat/mutimedia" method="POST">
+    <div class="form-group">
+      <label for="message">Message :</label>
+      <input class="form-control" type="text" name="messagess" id="messagess" placeholder="enter message">
+      <input class="form-control" type="text" name="user_id" id="user_id" placeholder="enter userid here" />
+      <button id="sendmessage" type="submit" class="btn btn-primary">SEND</button>
+  </form>
+
+  <!--  MULTIPLE  PHOTO  --->
+  <!-- accept="image/*" -->
+  <form action="/api/v1/chat/mutimedia" enctype="multipart/form-data" method="POST">
+    <label for="image">Image and Videos :</label>  <input type="file" id="files" name="myFiles" accept="image/* video/*"  multiple/>
+    <input class="form-control" type="text" name="messagess" id="messagess" placeholder="enter content">
+    <input class="form-control" type="text" name="user_id" id="user_id" placeholder="enter userid here" />
+    <button id="send" type="submit" class="btn btn-primary">Send Files</button>
+  </form>
+
+
+  <form action="/api/v1/chat/document" enctype="multipart/form-data" method="POST">
+    <label for="document">Document :</label> <input type="file" id="link" name="link" accept="image/* video/*" multiple/>
+    <input class="form-control" type="text" name="messagess" id="messagess" placeholder="enter content">
+    <input class="form-control" type="text" name="user_id" id="user_id" placeholder="enter userid here" />
+    <button id="send" type="submit" class="btn btn-primary">Send Files</button>
+  </form>
+
+  </section>
+</body>
+<script>
+  var socket = io();
+  var lastKnownMessage;
+  // client
+
+  socket.on('message', function (data) {
+    // Do something with `data`
+    lastKnownMessage = data;
+    console.log(data);
+  // callback(); // confirm we received the message
+  });
+
+  socket.on('connection', function () {
+    console.log("connected");
+    if (previouslyConnected) {
+      console.log(lastKnownMessage);
+      socket.emit('reconnection', lastKnownMessage);
+    }
+    else {
+      // first connection; any further connections means we disconnected
+      previouslyConnected = true;
+    }
+  });
+
+  socket.on('multimedia', function (data) {
+    // Do something with `data`
+    lastKnownMessage = data;
+    console.log(data);
+   // callback(); // confirm we received the message
+  });
+
+</script>
+
+</html>

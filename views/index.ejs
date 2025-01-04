@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat-App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="card bg-light mb-3">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRxx5iqEF4sfJNPYbybDCnsogBKMXD7_PRD4M3AGT7t7tN0p6ZP&usqp=CAU"
+        class="card-img-top" alt="..." style="height: 13em; width: 16em;" />
+      <div class="card-body">
+        <h5 class="card-title">Enter Chat Room Name</h5>
+        <form  method="POST">
+          <div class="form-group">
+            <label for="username">Display Name:</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="enter username"
+              required />
+          </div>
+          <div class="form-group">
+            <label for="roomName">Room Name:</label>
+            <input type="text" name="roomName" class="form-control" id="roomName" placeholder="enter room name"
+              required />
+          </div>
+          <input type="submit" id="roombtn" class="btn btn-primary"></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  let message = document.getElementById("roomName");
+  const btn = document.getElementById("roombtn");
+  btn.addEventListener('click', function () {
+    socket.emit("join", { username: "taranjeet", roomName: "general" }, (error) => {
+      if (error) {
+        alert(error);
+        location.href = "/";
+      }
+    });
+  });
+
+</script>
+
+</html>
