@@ -9,7 +9,7 @@ const { lastKnownMessage } = require("../../../helper/users");
 
 var FCM = require("fcm-node");
 const { userList } = require("../../user/controllers/user.controller");
-var serverKey =process.env.ECMSERVERKEY; //put your server key here
+var serverKey =process.env.FCMSERVERKEY; //put your server key here
 var fcm = new FCM(serverKey);
 
 exports.getchat = asyncHandler(async (req, res, next) => {
